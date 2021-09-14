@@ -1,25 +1,29 @@
 import {StatusBar} from 'expo-status-bar';
 import React, {useState} from 'react';
-import {TextInput, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 export default function App() {
-    const [name, setName] = useState('Shaun')
-    const [age, setAge] = useState('30')
 
+    const [people, setPeople] = useState([
+        {name: 'shaun', key: '1'},
+        {name: 'jay', key: '2'},
+        {name: 'steph', key: '3'},
+        {name: 'steve', key: '4'},
+        {name: 'ian', key: '5'},
+        {name: 'gerlad', key: '6'},
+        {name: 'afag', key: '7'},
+    ])
     return (
         <View style={styles.container}>
-            <Text>name: {name} age: {age}</Text>
-            <Text>Enter Name</Text>
-            <TextInput
-                style={styles.input}
-                placeholder={'e.g. John Doe'}
-                onChangeText={(val) => setName(val)}/>
-            <Text>Enter Age</Text>
-            <TextInput
-                keyboardType={'numeric'}
-                style={styles.input}
-                placeholder={'e.g. 99'}
-                onChangeText={(val) => setAge(val)}/>
+            <ScrollView>
+                {people.map(value =>
+                    (
+                        <View key={value.key}>
+                            <Text style={styles.item}>{value.name}</Text>
+                        </View>
+                    )
+                )}
+            </ScrollView>
         </View>
     );
 }
@@ -28,15 +32,16 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        paddingTop: 40,
+        paddingHorizontal: 20
+
     },
-    input: {
-        borderWidth: 1,
-        borderColor: '#777',
-        padding: 8,
-        margin: 10,
-        width: 200
+    item: {
+        marginTop: 24,
+        padding: 30,
+        backgroundColor: 'pink',
+        fontSize: 24
     }
+
 
 });
